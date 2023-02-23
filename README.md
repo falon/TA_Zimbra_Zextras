@@ -1,4 +1,4 @@
-TA_Zimbra_Zextras v0.0.1
+TA_Zimbra_Zextras v0.0.2
 ----------------
 
 This project has inspired by the work of Simon Richardson, the add-on [TA Zimbra](https://splunkbase.splunk.com/app/5704).
