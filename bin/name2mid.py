@@ -22,6 +22,8 @@ import logging
 import logging.handlers
 
 # Zimbra libs
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__),"zimbralib"))
 import pythonzimbra.communication
 from pythonzimbra.communication import Communication
 import pythonzimbra.tools

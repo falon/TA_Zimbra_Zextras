@@ -73,12 +73,6 @@ ZIMBRA SOAP
 -----------
 We interface with Zimbra Admin server in order to ask some useful info.
 
-## Requirements
-You have to installa the `python-zimbra` module:
-```
-LD_LIBRARY_PATH=$SPLUNK_HOME/lib HTTPS_PROXY=<your proxy server>:<your proxy port> $SPLUNK_HOME/bin/pip3 install python-zimbra
-```
-
 ## midlookup
 With `midlookup` you can ask the _mailbox id_ and _mailbox server_ starting from the _mailbox name_.
 In this way you can link the _mailbox name_ to the _mailbox_id_ which you find in the logs.

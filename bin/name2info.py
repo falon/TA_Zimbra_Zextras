@@ -20,7 +20,8 @@ import os
 import logging
 import logging.handlers
 import re
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "lib"))
+sys.path.append(os.path.join(os.path.dirname(__file__),"zimbralib"))
+#sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "lib"))
 from splunklib.searchcommands import dispatch, StreamingCommand, Configuration, Option, validators
 from pathlib import Path
 
