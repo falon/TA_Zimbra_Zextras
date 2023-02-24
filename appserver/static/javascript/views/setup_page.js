@@ -34,7 +34,7 @@ export async function perform(splunk_js_sdk, setup_options) {
 
         // Redirect to the Splunk App's home page
 	await alert('Configuration setup completed!')
-        Config.redirect_to_splunk_app_homepage("search");
+        Config.redirect_to_splunk_app_homepage(app_name);
     } catch (error) {
         // This could be better error catching.
         // Usually, error output that is ONLY relevant to the user

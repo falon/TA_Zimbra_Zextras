@@ -1,0 +1,15 @@
+<nav search_view="search">
+	<view name="search"  default="true" />
+  <collection label="Dashboards">
+        <view source="unclassified" />
+  </collection>
+  <collection label="Reports">
+        <collection label="Summary">
+                <saved source="unclassified" match="Summary -" />
+        </collection>
+        <divider />
+        <saved source="unclassified" />
+  </collection>
+  <view name="alerts" />
+</nav>
+

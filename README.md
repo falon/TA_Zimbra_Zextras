@@ -32,6 +32,43 @@ index = main
 sourcetype = zimbra:zsyslog
 ```
 
+INSTALL
+------------------------------------
+At the first run a setup page helps to configure many configuration parameters of _zimbra.conf_ file.
+
+Then you must manually insert the lookup files that are useful if you also use the _Splunk for Zimbra with Zextras_ app.
+
+To add the lookup files you can use the [Splunk App for Lookup Editing](https://splunkbase.splunk.com/app/1724), or simply perform these searches from the search page of this add-on:
+
+```
+| makeresults format=csv data="dest_ip,dest_type
+127.0.0.1,local
+<net/mask>,zimbra"
+| outputlookup dest_type.csv
+```
+
+and
+
+```
+| makeresults format=csv data="mta_server,src_type
+<submit_mta_name>,outbound
+<inbound_mta_name>,inbound"
+| outputlookup orig_type.csv
+```
+
+`<net/mask>` is the subnet of your mailbox servers. Ie: "10.10.10.0/24"
+
+`<submit_mta_name>` is the hostname (as shown in mta_server field) of your outbound servers. It can contains wildcard (\*) if you have multiple servers to match.
+
+`<inbound_mta_name>` is the hostname (as shown in mta_server field) of your inbound servers. It can contains wildcard (\*) if you have multiple servers to match.
+
+An example of submit or inbound mta_name is _myoutboundzimbraserver*_, which could match
+
+- myoutboundzimbraserver1
+- myoutboundzimbraserver2
+- myoutboundzimbraserverA
+
+
 ZIMBRA SOAP
 -----------
 We interface with Zimbra Admin server in order to ask some useful info.
