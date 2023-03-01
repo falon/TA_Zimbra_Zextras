@@ -42,7 +42,7 @@ To add the lookup files you can use the [Splunk App for Lookup Editing](https://
 
 ```
 | makeresults format=csv data="dest_ip,dest_type
-127.0.0.1,local
+127.0.0.1/32,local
 <net/mask>,zimbra"
 | outputlookup dest_type.csv
 ```
