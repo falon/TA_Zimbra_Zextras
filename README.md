@@ -90,7 +90,7 @@ and the _account name_ will appear as a new result field.
 
 ## name2info
 With `name2info` you can ask to Zimbra many mailbox info. You provide the mailbox name in the mandatory `field`, which could be one of
-_user_, _auth_name_, _authz_name_ or _user_ value.
+_user_, _authz_name_ or _name_ value.
 
 Usage:
 ```| makeresults count=1 | eval authz_name=<your mailbox name> | name2info field=authz_name```
