@@ -15,10 +15,7 @@ Finally, a command _name2info.py_ provides a way to query SOAP API in order to e
 
 You have to make your configuration in the file *zimbra.conf*, in particular write your Zimbra credentials.
 We suggest to copy the file in your "local" folder and then modify it as needed.
-
-Install dependecies in your Splunk Python environment:
-
-`sudo -u splunk LD_LIBRARY_PATH=$SPLUNK_HOME/lib HTTPS_PROXY=<proxy server fqdn>:<port> $SPLUNK_HOME/bin/pip3 install python-zimbra`
+On Splunk Cloud you can configure *zimbra.conf* by the setup page.
 
 ### Test
 
@@ -65,13 +62,16 @@ If all is fine you will see something like:
 
 These python script depends on
 
-- Python Zimbra - https://github.com/Zimbra-Community/python-zimbra
+- [Python Zimbra](https://github.com/Zimbra-Community/python-zimbra)
+- [Splunk Enterprise SDK for Python](https://dev.splunk.com/enterprise/docs/devtools/customsearchcommands/createcustomsearchcmd#Install-the-Splunk-Enterprise-SDK-for-Python-in-your-app)
 
-In order to work properly you must add this env variable to your `splunk-launch.conf` file:
+### Note For developers
+You can install Python Zimbra with
+`sudo -u splunk LD_LIBRARY_PATH=$SPLUNK_HOME/lib HTTPS_PROXY=proxy.example.com:80 $SPLUNK_HOME/bin/pip3 install --target=$SPLUNK_HOME/etc/apps/TA_Zimbra_Zextras/bin/zimbralib python-zimbra`.
 
-```
-LD_LIBRARY_PATH=$SPLUNK_HOME/lib
-```
+You can install _splunklib_ following the instruction in _Splunk Enterprise SDK for Python_. So:
+copy and paste the __/splunklib__ directory from the _Splunk Enterprise SDK for Python_ into the bin directory of your app. For example, copy the __/splunklib__ directory into __$SPLUNK_HOME/etc/apps/app_name/bin__.
+
 
 ## USAGE
 

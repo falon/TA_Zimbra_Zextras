@@ -1,4 +1,4 @@
-<nav search_view="search">
+<nav search_view="search" color="#f15a25">
 	<view name="search"  default="true" />
   <collection label="Dashboards">
         <view source="unclassified" />
