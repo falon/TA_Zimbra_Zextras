@@ -5,13 +5,13 @@
     "id": {
       "group": null,
       "name": "TA_Zimbra_Zextras",
-      "version": "0.0.2"
+      "version": "0.0.3"
     },
     "author": [
       {
         "name": "Marco Favero",
-        "email": null,
-        "company": null
+        "email": "marco.favero@csi.it",
+        "company": "CSI Piemonte"
       }
     ],
     "releaseDate": null,
