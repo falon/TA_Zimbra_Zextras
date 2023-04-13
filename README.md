@@ -13,7 +13,7 @@ Of course you could install Universal forwarder on each Zimbra server and config
 
 If you like (we suggest this), you can forward all logs to the Splunk machine.
 Then you tell Splunk to monitor local logs.
-A model of syslog aggregation server will be [described here](README_rsyslog.md).
+A model of syslog aggregation server is [described here](README_rsyslog.md).
 
 
 GLOBAL LOGS (configure on your syslog central server local to Splunk)
@@ -68,6 +68,7 @@ An example of submit or inbound mta_name is _myoutboundzimbraserver*_, which cou
 - myoutboundzimbraserver2
 - myoutboundzimbraserverA
 
+It's important that you perform the two above seaarches **from the search page of this add-on**.
 
 ZIMBRA SOAP
 -----------
@@ -99,5 +100,5 @@ More info to configure these interfaces can be found [here](README_MAILBOX_MID.m
 
 BUILD NOTES
 -----------
-This add-on was built on Splunk Enterprise v9.0.3 but will work with 8.x  
+This add-on was built on Splunk Enterprise v9.0.3.
 This add-on was configured against a multi-server Zimbra Open Source installation running v8.8.15_GA_4372
