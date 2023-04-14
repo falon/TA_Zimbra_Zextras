@@ -96,6 +96,25 @@ _user_, _authz_name_ or _name_ value.
 Usage:
 ```| makeresults count=1 | eval authz_name=<your mailbox name> | name2info field=authz_name```
 
+Other queries are:
+- find members of distribution lists. A `member` multivalue attribute is returned.
+
+Ie:
+
+`| makeresults count=1 | eval name="_grp_rw_animals@example.com" | name2info field="name" get="list"`
+
+returns many attributes describing the distribution list "_grp_rw_animals@example.com". In particular, the `member` multivalue attribute contains the members of the distribution list.
+
+
+- find which distribution list the account is member of. A `memberOf` JSON multivalue attribute is returned.
+
+Ie:
+
+`| makeresults count=1 | eval authz_name="marco@example.com" | name2info field="authz_name" get="memberOf" | mvexpand memberOf | spath input=memberOf | table authz_name name dynamic via`
+
+returns a table where `name` values are the distribution list subscribed by marco@example.com.
+
+
 More info to configure these interfaces can be found [here](README_MAILBOX_MID.md).
 
 BUILD NOTES

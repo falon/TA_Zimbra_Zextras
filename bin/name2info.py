@@ -174,6 +174,35 @@ def getDistributionList(conn, usr_token, listName, retAttrs='mail'):
         log.error(info_response.get_fault_message())
 
 
+def GetAccountMembershipRequest(conn, usr_token, accountName):
+    attr = {}
+    log = logging.getLogger(loggerName)
+    info_request = conn.gen_request(token=usr_token)
+    # Get info on listName
+    info_request.add_request(
+        'GetAccountMembershipRequest',
+        {
+            'account': {
+                'by': 'name',
+                '_content': accountName
+            },
+        },
+        'urn:zimbraAdmin'
+    )
+    info_response = conn.send_request(info_request)
+    if not info_response.is_fault():
+        attrs = info_response.get_response()['GetAccountMembershipResponse']['dl']
+        if not info_response.is_fault():
+            attr['memberOf'] = []
+            for item in attrs:
+                attr['memberOf'].append(item)
+            info_request.clean()
+        else:
+            log.error(info_response.get_fault_message())
+        return attr
+    else:
+        log.error(info_response.get_fault_message())
+
 
 @Configuration()
 class StreamingZINFO(StreamingCommand):
@@ -186,7 +215,7 @@ class StreamingZINFO(StreamingCommand):
     """
 
     field = Option(require=True, validate=validators.Match("validate","authz_name|name|user"))
-    get = Option(require=False, default="account", validate=validators.Match("validate","account|list"))
+    get = Option(require=False, default="account", validate=validators.Match("validate","account|list|memberOf"))
 
     def stream(self, records):
         config_file = '../local/zimbra.conf'
@@ -259,6 +288,8 @@ class StreamingZINFO(StreamingCommand):
                     answer = getMailbox_id(zconn, token, record[self.field], attributes['account'])
                 elif self.get == "list":
                     answer = getDistributionList(zconn, token, record[self.field], attributes['list'])
+                elif self.get == "memberOf":
+                    answer = GetAccountMembershipRequest(zconn, token, record[self.field])
             except Exception as e:
                 log.critical(e)
                 answer = None
