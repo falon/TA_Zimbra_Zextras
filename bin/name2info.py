@@ -44,7 +44,7 @@ def load_config(file):
 
 loggerName = 'name2info'
 log = logging.getLogger(loggerName)
-def set_log(handler_type, socket, facility, level='INFO', stdout=False, filepath=False):
+def set_log(handler_type, socketaddr, facility, level='INFO', stdout=False, filepath=False):
     log = logging.getLogger(loggerName)
     log.setLevel(level)
     formatter_syslog = logging.Formatter('%(module)s[%(process)d]: %(message)s')
@@ -52,7 +52,7 @@ def set_log(handler_type, socket, facility, level='INFO', stdout=False, filepath
     formatter_file   = logging.Formatter('%(asctime)s %(module)s[%(process)d]/%(funcName)s: %(levelname)8s: %(message)s')
 
     if handler_type == 'syslog':
-        handler_syslog = logging.handlers.SysLogHandler(address=socket, facility=facility)
+        handler_syslog = logging.handlers.SysLogHandler(address=socketaddr, facility=facility, socktype=socket.SOCK_STREAM)
         handler_syslog.setFormatter(formatter_syslog)
         handler_syslog.setLevel(level)
         log.addHandler(handler_syslog)
@@ -229,7 +229,6 @@ class StreamingZINFO(StreamingCommand):
         config_var = load_config([CONFIG_DEFAULT,CONFIG_LOCAL])
 
         logging_parameters =  config_var["Logging"]
-        LOGFILE_DIR = logging_parameters['LOGFILE_DIR']
         LOGFILE_NAME = logging_parameters['LOGFILE_NAME']
         LOGSTDOUT = logging_parameters.getboolean('LOGSTDOUT')
         LOGHANDLER = logging_parameters['TYPE']
@@ -250,7 +249,7 @@ class StreamingZINFO(StreamingCommand):
         proxy = config_var["Proxy"]
         ignoreProxy = proxy.getboolean("IgnoreProxy")
 
-        for confvar in ( LOGFILE_DIR, LOGFILE_NAME, LOGSTDOUT, LOGHANDLER, SYSLOG_FAC, SYSLOG_LEVEL, SYSLOG_SOCKET, adminUrl, admin, admin_password, accounts, lists, ignoreProxy ):
+        for confvar in ( LOGFILE_NAME, LOGSTDOUT, LOGHANDLER, SYSLOG_FAC, SYSLOG_LEVEL, SYSLOG_SOCKET, adminUrl, admin, admin_password, accounts, lists, ignoreProxy ):
             if confvar is None:
                 print("Please check the config file! Some parameters are missing.")
                 sys.exit(2)
@@ -266,7 +265,7 @@ class StreamingZINFO(StreamingCommand):
                 homeSplunk = os.environ['SPLUNK_HOME']
             else:
                 homeSplunk = '/opt/splunk'
-            LOGFILE_DIR = homeSplunk + LOGFILE_DIR
+            LOGFILE_DIR = homeSplunk + '/var/log/splunk'
             LOGFILE_PATH = os.path.join(LOGFILE_DIR, LOGFILE_NAME)
             Path(LOGFILE_DIR).mkdir(exist_ok=True)
             Path(LOGFILE_PATH).touch()
@@ -277,6 +276,10 @@ class StreamingZINFO(StreamingCommand):
         if not set_log(LOGHANDLER, SYSLOG_SOCKET, SYSLOG_FAC, SYSLOG_LEVEL, LOGSTDOUT, LOGFILE_PATH):
             print("Something wrong in log definition")
             sys.exit(1)
+
+        if not adminUrl.startswith('https://'):
+            log.critical('The Zimbra admin uri does not start with https://. Only a secure connection is allowed.')
+            sys.exit(2)
 
         (zconn, token) = zConnect(adminUrl, admin, admin_password)
         if zconn is None:

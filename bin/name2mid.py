@@ -54,7 +54,7 @@ def load_config(file):
 
 loggerName = 'name2mid'
 log = logging.getLogger(loggerName)
-def set_log(handler_type, socket, facility, level='INFO', stdout=False, filepath=False):
+def set_log(handler_type, socketaddr, facility, level='INFO', stdout=False, filepath=False):
     log = logging.getLogger(loggerName)
     log.setLevel(level)
     formatter_syslog = logging.Formatter('%(module)s[%(process)d]: %(message)s')
@@ -62,7 +62,7 @@ def set_log(handler_type, socket, facility, level='INFO', stdout=False, filepath
     formatter_file   = logging.Formatter('%(asctime)s %(module)s[%(process)d]/%(funcName)s: %(levelname)8s: %(message)s')
 
     if handler_type == 'syslog':
-        handler_syslog = logging.handlers.SysLogHandler(address=socket, facility=facility)
+        handler_syslog = logging.handlers.SysLogHandler(address=socketaddr, facility=facility, socktype=socket.SOCK_STREAM)
         handler_syslog.setFormatter(formatter_syslog)
         handler_syslog.setLevel(level)
         log.addHandler(handler_syslog)
@@ -183,7 +183,6 @@ def main():
     ignoreProxy = proxy.getboolean("IgnoreProxy")
 
     logging_parameters =  config_var["Logging"]
-    LOGFILE_DIR = logging_parameters['LOGFILE_DIR']
     LOGFILE_NAME = logging_parameters['LOGFILE_NAME']
     LOGSTDOUT = logging_parameters.getboolean('LOGSTDOUT')
     LOGHANDLER = logging_parameters['TYPE']
@@ -192,10 +191,11 @@ def main():
     SYSLOG_SOCKET = logging_parameters['SYSLOG_SOCKET']
 
 
-    for confvar in ( LOGFILE_DIR, LOGFILE_NAME, LOGSTDOUT, LOGHANDLER, SYSLOG_FAC, SYSLOG_LEVEL, SYSLOG_SOCKET, adminUrl, admin, admin_password, nullStr, ignoreProxy ):
+    for confvar in ( LOGFILE_NAME, LOGSTDOUT, LOGHANDLER, SYSLOG_FAC, SYSLOG_LEVEL, SYSLOG_SOCKET, adminUrl, admin, admin_password, nullStr, ignoreProxy ):
         if confvar is None:
             sys.exit("Please check the config file! Some parameters are missing.")
 
+    LOGFILE_DIR = '/var/log/splunk'
     # Zimbra SOAP doesn't work through proxy
     if ignoreProxy:
         if 'HTTP_PROXY' in os.environ:

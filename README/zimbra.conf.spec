@@ -38,16 +38,10 @@ SYSLOG_SOCKET = <string>
 * Syslog socket
 * Default: /dev/log
 
-  ; File dir from SPLUNK_HOME
-LOGFILE_DIR = <string>
-* If you choose to log directly to a file, then you have to specify a location.
-  The path is relative to SPLUNK_HOME.
-  Ie: if you insert "/var/log", the path will be "SPLUNK_HOME/var/log".
-* Default: /var/log
-
 LOGFILE_NAME = <string>
 * If you choose to log directly to a file, this is the file name.
-  You have also to set the LOGFILE_DIR parameter and TYPE = file.
+  You have also to set TYPE = file.
+  The path of the file will be "SPLUNK_HOME/var/log/splunk"
 * Default: name2info.log
 
 LOGSTDOUT = <boolean>

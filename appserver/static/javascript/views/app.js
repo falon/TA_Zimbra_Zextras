@@ -21,14 +21,13 @@ define(["react", "splunkjs/splunk"], function(react, splunk_js_sdk){
         syslog_fac: 'syslog',
         log_level: 'DEBUG',
         syslog_socket: '/dev/log',
-        logfile_dir: '/var/log',
         logfile_name: 'zimbra.log',
         logstdout: 'false',
         adminurl: '',
         admin: 'admin',
         pwd: '',
         nullstr: 'void',
-        acc_attributes: "zimbraId,\n     zimbraMailHost,\n     zimbraSieveRejectMailEnabled,\n     zimbraMailQuota,\n     zimbraQuotaWarnPercent,\n     zimbraQuotaWarnInterval,\n     givenName,\n     sn,\n     mail,\n     zimbraAccountStatus,\n     zimbraMailStatus,\n     zimbraFeatureConversationsEnabled,\n     zimbraPrefSentMailFolder,\n     zimbraMailTrashLifetime,\n     zimbraMailSpamLifetime,\n     zimbraMailSieveScript,\n     zimbraSharedItem,\n     zimbraFeatureMailForwardingEnabled,\n     zimbraFeatureMailForwardingInFiltersEnabled",
+        acc_attributes: "zimbraId,\n     zimbraMailHost,\n     zimbraSieveRejectMailEnabled,\n     zimbraMailQuota,\n     zimbraQuotaWarnPercent,\n     zimbraQuotaWarnInterval,\n     givenName,\n     sn,\n     mail,\n     zimbraAccountStatus,\n     zimbraMailStatus,\n     zimbraFeatureConversationsEnabled,\n     zimbraPrefSentMailFolder,\n     zimbraMailTrashLifetime,\n     zimbraMailSpamLifetime,\n     zimbraMailSieveScript,\n     zimbraSharedItem,\n     zimbraFeatureMailForwardingEnabled,\n     zimbraFeatureMailForwardingInFiltersEnabled,\n     zimbraFeatureOutOfOfficeReplyEnabled,\n     zimbraPrefOutOfOfficeCacheDuration,\n     zimbraPrefOutOfOfficeReply,\n     zimbraPrefOutOfOfficeStatusAlertOnLogin,\n     zimbraPrefOutOfOfficeReplyEnabled",
         list_attributes: "zimbraMailAlias,\n     zimbraHideInGal,\n     mail,\n     displayName,\n     zimbraMailHost,\n     zimbraDistributionListSendShareMessageToNewMembers,\n     cn,\n     zimbraMailStatus,\n     uid,\n     zimbraId,\n     zimbraCreateTimestamp",
         ignore_proxy: 'true',
       };
@@ -71,10 +70,6 @@ define(["react", "splunkjs/splunk"], function(react, splunk_js_sdk){
               e("input", { type: "text", name: "syslog_socket", value: this.state.syslog_socket, onChange: this.handleChange })
             ]),
             e("label", null, [
-              "LOG File Folder ",
-              e("input", { type: "text", name: "logfile_dir", value: this.state.logfile_dir, onChange: this.handleChange })
-            ]),
-            e("label", null, [
               "LOG File Name ",
               e("input", { type: "text", name: "logfile_name", value: this.state.logfile_name, onChange: this.handleChange })
             ]),
@@ -84,7 +79,7 @@ define(["react", "splunkjs/splunk"], function(react, splunk_js_sdk){
             ]),
             e("h3", null, "SOAP"),
             e("label", null, [
-              "Admin URL ",
+              "Admin URL: https://",
               e("input", { type: "text", name: "adminurl", value: this.state.adminurl, size: 50, onChange: this.handleChange })
             ]),
             e("label", null, [

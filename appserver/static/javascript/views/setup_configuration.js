@@ -1,4 +1,5 @@
 import * as SplunkHelpers from './splunk_helpers.js'
+// import * as StoragePasswords from './storage_passwords.js'
 
 // all_properties must be a dict with
 //  type,
@@ -21,6 +22,19 @@ async function create_custom_configuration_file(
   splunk_js_sdk_service,
   all_properties
 ) {
+
+  //// Write SOAP Password to passwords.conf
+  // var secret_realm = 'TA_Zimbra_Zextras_realm';
+  // var secret_name = 'admin';
+
+  //await StoragePasswords.write_secret(
+  //    splunk_js_sdk_service,
+  //    secret_realm,
+  //    secret_name,
+  //    all_properties.pwd,
+  //);
+
+  // Write the zimbra.conf file
   var custom_configuration_file_name = "zimbra";
   var stanza_name = "Logging";
   var properties_to_update = {
@@ -28,7 +42,6 @@ async function create_custom_configuration_file(
           SYSLOG_FAC: all_properties.syslog_fac,
           LOG_LEVEL: all_properties.log_level,
           SYSLOG_SOCKET: all_properties.syslog_socket,
-          LOGFILE_DIR: all_properties.logfile_dir,
           LOGFILE_NAME: all_properties.logfile_name,
           LOGSTDOUT: all_properties.logstdout,
   };
@@ -42,8 +55,9 @@ async function create_custom_configuration_file(
 
   var stanza_name = "Soap";
   var properties_to_update = {
-	  adminUrl: all_properties.adminurl,
+	  adminUrl: 'https://' + all_properties.adminurl,
 	  admin: all_properties.admin,
+	  // Remove the following line if you want to use StoragePassword
 	  pwd: all_properties.pwd,
 	  NullStr: all_properties.nullstr,
   };
@@ -54,7 +68,6 @@ async function create_custom_configuration_file(
       stanza_name,
       properties_to_update,
   );
-  console.log(properties_to_update);
 
   var stanza_name = "Account";
   var properties_to_update = {
