@@ -130,11 +130,3 @@ Attributes = <string>
      zimbraId
      zimbraCreateTimestamp
 * Default: all the above allowed values
-
-
-# Proxy ENV setting
-[Proxy]
-IgnoreProxy = <string>
-* Ignore env proxy setting.
-  Sometimes the SOAP call could fail if sent through a web proxy.
-* Default: true
