@@ -185,7 +185,6 @@ def main():
     nullStr = Soap["NullStr"]
 
     proxy = config_var["Proxy"]
-    ignoreProxy = proxy.getboolean("IgnoreProxy")
 
     logging_parameters =  config_var["Logging"]
     LOGFILE_NAME = logging_parameters['LOGFILE_NAME']
@@ -196,17 +195,11 @@ def main():
     SYSLOG_SOCKET = logging_parameters['SYSLOG_SOCKET']
 
 
-    for confvar in ( LOGFILE_NAME, LOGSTDOUT, LOGHANDLER, SYSLOG_FAC, SYSLOG_LEVEL, SYSLOG_SOCKET, adminUrl, admin, admin_password, nullStr, ignoreProxy ):
+    for confvar in ( LOGFILE_NAME, LOGSTDOUT, LOGHANDLER, SYSLOG_FAC, SYSLOG_LEVEL, SYSLOG_SOCKET, adminUrl, admin, admin_password, nullStr ):
         if confvar is None:
             sys.exit("Please check the config file! Some parameters are missing.")
 
     LOGFILE_DIR = '/var/log/splunk'
-    # Zimbra SOAP doesn't work through proxy
-    if ignoreProxy:
-        if 'HTTP_PROXY' in os.environ:
-            del os.environ['HTTP_PROXY']
-        if 'HTTPS_PROXY' in os.environ:
-            del os.environ['HTTPS_PROXY']
 
     if LOGHANDLER == 'file':
         if 'SPLUNK_HOME' in os.environ:

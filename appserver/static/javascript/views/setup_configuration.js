@@ -93,19 +93,6 @@ async function create_custom_configuration_file(
       properties_to_update,
   );
 
-  var stanza_name = "Proxy";
-  var properties_to_update = {
-	  IgnoreProxy: all_properties.ignore_proxy,
-  }
-
-  await SplunkHelpers.update_configuration_file(
-      splunk_js_sdk_service,
-      custom_configuration_file_name,
-      stanza_name,
-      properties_to_update,
-  );
-};
-
 async function complete_setup(splunk_js_sdk_service) {
   var configuration_file_name = "app";
   var stanza_name = "install";

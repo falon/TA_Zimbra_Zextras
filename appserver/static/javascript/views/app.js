@@ -29,7 +29,6 @@ define(["react", "splunkjs/splunk"], function(react, splunk_js_sdk){
         nullstr: 'void',
         acc_attributes: "zimbraId,\n     zimbraMailHost,\n     zimbraSieveRejectMailEnabled,\n     zimbraMailQuota,\n     zimbraQuotaWarnPercent,\n     zimbraQuotaWarnInterval,\n     givenName,\n     sn,\n     mail,\n     zimbraAccountStatus,\n     zimbraMailStatus,\n     zimbraFeatureConversationsEnabled,\n     zimbraPrefSentMailFolder,\n     zimbraMailTrashLifetime,\n     zimbraMailSpamLifetime,\n     zimbraMailSieveScript,\n     zimbraSharedItem,\n     zimbraFeatureMailForwardingEnabled,\n     zimbraFeatureMailForwardingInFiltersEnabled,\n     zimbraFeatureOutOfOfficeReplyEnabled,\n     zimbraPrefOutOfOfficeCacheDuration,\n     zimbraPrefOutOfOfficeReply,\n     zimbraPrefOutOfOfficeStatusAlertOnLogin,\n     zimbraPrefOutOfOfficeReplyEnabled",
         list_attributes: "zimbraMailAlias,\n     zimbraHideInGal,\n     mail,\n     displayName,\n     zimbraMailHost,\n     zimbraDistributionListSendShareMessageToNewMembers,\n     cn,\n     zimbraMailStatus,\n     uid,\n     zimbraId,\n     zimbraCreateTimestamp",
-        ignore_proxy: 'true',
       };
 
       this.handleChange = this.handleChange.bind(this);
@@ -103,11 +102,6 @@ define(["react", "splunkjs/splunk"], function(react, splunk_js_sdk){
             e("label", null, [
               "Attributes to return ",
               e("textarea", { name: "list_attributes", value: this.state.list_attributes, rows: 10, onChange: this.handleChange })
-            ]),
-	    e("h3", null, "Proxy configuration"),
-            e("label", null, [
-              "Ignore Proxy env ",
-              e("input", { type: "text", name: "ignore_proxy", value: this.state.ignore_proxy, onChange: this.handleChange })
             ]),
             e("input", { type: "submit", value: "Submit" })
           ])

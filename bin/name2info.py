@@ -246,19 +246,11 @@ class StreamingZINFO(StreamingCommand):
         attributes = {}
         attributes['account'] = re.sub(",\s*\\\s*\n", ",", accounts['Attributes'])
         attributes['list'] = re.sub(",\s*\\\s*\n", ",", lists['Attributes'])
-        proxy = config_var["Proxy"]
-        ignoreProxy = proxy.getboolean("IgnoreProxy")
 
-        for confvar in ( LOGFILE_NAME, LOGSTDOUT, LOGHANDLER, SYSLOG_FAC, SYSLOG_LEVEL, SYSLOG_SOCKET, adminUrl, admin, admin_password, accounts, lists, ignoreProxy ):
+        for confvar in ( LOGFILE_NAME, LOGSTDOUT, LOGHANDLER, SYSLOG_FAC, SYSLOG_LEVEL, SYSLOG_SOCKET, adminUrl, admin, admin_password, accounts, lists ):
             if confvar is None:
                 print("Please check the config file! Some parameters are missing.")
                 sys.exit(2)
-
-        if ignoreProxy:
-            if 'HTTP_PROXY' in os.environ:
-                del os.environ['HTTP_PROXY']
-            if 'HTTPS_PROXY' in os.environ:
-                del os.environ['HTTPS_PROXY']
 
         if LOGHANDLER == 'file':
             if 'SPLUNK_HOME' in os.environ:
