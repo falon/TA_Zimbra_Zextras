@@ -184,8 +184,6 @@ def main():
     admin_password = Soap['pwd']
     nullStr = Soap["NullStr"]
 
-    proxy = config_var["Proxy"]
-
     logging_parameters =  config_var["Logging"]
     LOGFILE_NAME = logging_parameters['LOGFILE_NAME']
     LOGSTDOUT = logging_parameters.getboolean('LOGSTDOUT')

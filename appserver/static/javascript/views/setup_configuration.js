@@ -15,7 +15,6 @@ import * as SplunkHelpers from './splunk_helpers.js'
 //  nullstr,
 //  acc_attributes,
 //  list_attributes,
-//  ignore_proxy
 // passed from app.js to setup_page.js
 
 async function create_custom_configuration_file(
@@ -92,6 +91,8 @@ async function create_custom_configuration_file(
       stanza_name,
       properties_to_update,
   );
+
+};
 
 async function complete_setup(splunk_js_sdk_service) {
   var configuration_file_name = "app";

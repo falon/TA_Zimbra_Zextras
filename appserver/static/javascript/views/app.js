@@ -28,7 +28,7 @@ define(["react", "splunkjs/splunk"], function(react, splunk_js_sdk){
         pwd: '',
         nullstr: 'void',
         acc_attributes: "zimbraId,\n     zimbraMailHost,\n     zimbraSieveRejectMailEnabled,\n     zimbraMailQuota,\n     zimbraQuotaWarnPercent,\n     zimbraQuotaWarnInterval,\n     givenName,\n     sn,\n     mail,\n     zimbraAccountStatus,\n     zimbraMailStatus,\n     zimbraFeatureConversationsEnabled,\n     zimbraPrefSentMailFolder,\n     zimbraMailTrashLifetime,\n     zimbraMailSpamLifetime,\n     zimbraMailSieveScript,\n     zimbraSharedItem,\n     zimbraFeatureMailForwardingEnabled,\n     zimbraFeatureMailForwardingInFiltersEnabled,\n     zimbraFeatureOutOfOfficeReplyEnabled,\n     zimbraPrefOutOfOfficeCacheDuration,\n     zimbraPrefOutOfOfficeReply,\n     zimbraPrefOutOfOfficeStatusAlertOnLogin,\n     zimbraPrefOutOfOfficeReplyEnabled",
-        list_attributes: "zimbraMailAlias,\n     zimbraHideInGal,\n     mail,\n     displayName,\n     zimbraMailHost,\n     zimbraDistributionListSendShareMessageToNewMembers,\n     cn,\n     zimbraMailStatus,\n     uid,\n     zimbraId,\n     zimbraCreateTimestamp",
+        list_attributes: "zimbraMailAlias,\n     zimbraHideInGal,\n     mail,\n     displayName,\n     zimbraMailHost,\n     zimbraDistributionListSendShareMessageToNewMembers,\n     cn,\n     zimbraMailStatus,\n     uid,\n     zimbraId,\n     zimbraCreateTimestamp"
       };
 
       this.handleChange = this.handleChange.bind(this);
