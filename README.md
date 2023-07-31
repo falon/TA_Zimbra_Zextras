@@ -3,6 +3,11 @@ TA_Zimbra_Zextras
 
 This project has inspired by the work of Simon Richardson, the add-on [TA Zimbra](https://splunkbase.splunk.com/app/5704).
 
+This app integrates
+
+- the [Splunk SDK for Python](https://dev.splunk.com/enterprise/docs/devtools/python/sdk-python) (client module).
+- the [Python-Zimbra](https://github.com/Zimbra-Community/python-zimbra) classes to access Zimbra SOAP backend.
+
 GETTING ZIMBRA DATA IN
 ----------------------
 The follwing add-on could be useful:
@@ -116,6 +121,7 @@ returns a table where `name` values are the distribution list subscribed by marc
 
 
 More info to configure these interfaces can be found [here](README_MAILBOX_MID.md).
+
 
 BUILD NOTES
 -----------
